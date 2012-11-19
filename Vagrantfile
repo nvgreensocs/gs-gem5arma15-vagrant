@@ -4,7 +4,7 @@
 
 # THIS CODE REQUIRED BY THE AMBA KIT
 if File.exist?("cookbooks/chef-amba-kit/files/default/amba_socket-1.0.15.tgz")
-  puts "Ok, we're good to go"
+#  puts "Ok, we're good to go"
 else
   puts "Please visit : "
   puts "https://portal.carbondesignsystems.com/login.aspx?ReturnUrl=%2fModel%2fCarbon%2fTLM-2.0-AMBA"
