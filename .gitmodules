@@ -1,0 +1,18 @@
+[submodule "cookbooks/chef-gcc"]
+	path = cookbooks/chef-gcc
+	url = git://git.greensocs.com/chef-gcc
+[submodule "cookbooks/chef-amba-kit"]
+	path = cookbooks/chef-amba-kit
+	url = git://git.greensocs.com/chef-amba-kit
+[submodule "cookbooks/chef-boost"]
+	path = cookbooks/chef-boost
+	url = git://git.greensocs.com/chef-boost
+[submodule "cookbooks/chef-gem5"]
+	path = cookbooks/chef-gem5
+	url = git://git.greensocs.com/chef-gem5
+[submodule "cookbooks/chef-python"]
+	path = cookbooks/chef-python
+	url = git://git.greensocs.com/chef-python
+[submodule "cookbooks/chef-systemc"]
+	path = cookbooks/chef-systemc
+	url = git://git.greensocs.com/chef-systemc
