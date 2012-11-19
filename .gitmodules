@@ -16,3 +16,9 @@
 [submodule "cookbooks/chef-systemc"]
 	path = cookbooks/chef-systemc
 	url = git://git.greensocs.com/chef-systemc
+[submodule "cookbooks/chef-libc-dev"]
+	path = cookbooks/chef-libc-dev
+	url = git://git.greensocs.com/chef-libc-dev
+[submodule "cookbooks/chef-make"]
+	path = cookbooks/chef-make
+	url = git://git.greensocs.com/chef-make
