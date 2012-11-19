@@ -1,6 +1,19 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+
+# THIS CODE REQUIRED BY THE AMBA KIT
+if File.exist?("cookbooks/chef-amba-kit/files/default/amba_socket-1.0.15.tgz")
+  puts "Ok, we're good to go"
+else
+  puts "Please visit : "
+  puts "https://portal.carbondesignsystems.com/login.aspx?ReturnUrl=%2fModel%2fCarbon%2fTLM-2.0-AMBA"
+  puts "and place the amba kit download in:"
+  puts "cookbooks/chef-amba-kit/files/default/amba_socket-1.0.15.tgz"
+  exit
+end
+
+
 Vagrant::Config.run do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
