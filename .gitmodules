@@ -22,3 +22,6 @@
 [submodule "cookbooks/chef-make"]
 	path = cookbooks/chef-make
 	url = git://git.greensocs.com/chef-make
+[submodule "cookbooks/chef-build-essential"]
+	path = cookbooks/chef-build-essential
+	url = git://git.greensocs.com/chef-build-essential
