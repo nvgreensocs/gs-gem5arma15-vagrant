@@ -25,3 +25,9 @@
 [submodule "cookbooks/chef-build-essential"]
 	path = cookbooks/chef-build-essential
 	url = git://git.greensocs.com/chef-build-essential
+[submodule "cookbooks/chef-greencontrol"]
+	path = cookbooks/chef-greencontrol
+	url = git://git.greensocs.com/chef-greencontrol
+[submodule "cookbooks/chef-greensocket"]
+	path = cookbooks/chef-greensocket
+	url = git://git.greensocs.com/chef-greensocket

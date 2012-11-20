@@ -2,17 +2,6 @@
 # vi: set ft=ruby :
 
 
-# THIS CODE REQUIRED BY THE AMBA KIT
-if File.exist?("cookbooks/chef-amba-kit/files/default/amba_socket-1.0.15.tgz")
-#  puts "Ok, we're good to go"
-else
-  puts "Please visit : "
-  puts "https://portal.carbondesignsystems.com/login.aspx?ReturnUrl=%2fModel%2fCarbon%2fTLM-2.0-AMBA"
-  puts "and place the amba kit download in:"
-  puts "cookbooks/chef-amba-kit/files/default/amba_socket-1.0.15.tgz"
-  exit
-end
-
 
 Vagrant::Config.run do |config|
   # All Vagrant configuration is done here. The most common configuration
@@ -110,8 +99,22 @@ Vagrant::Config.run do |config|
   #
   #   chef.validation_client_name = "ORGNAME-validator"
 
+
   Vagrant::Config.run do |config|
+
     config.vm.provision :chef_solo do |chef|
+
+# THIS CODE REQUIRED BY THE AMBA KIT
+      if File.exist?("./cookbooks/chef-amba-kit/files/default/amba_socket-1.0.15.tgz")
+#  puts "Ok, we're good to go"
+      else
+	puts "Please visit : "
+	puts "https://portal.carbondesignsystems.com/login.aspx?ReturnUrl=%2fModel%2fCarbon%2fTLM-2.0-AMBA"
+	puts "and place the amba kit download in:"
+	puts "cookbooks/chef-amba-kit/files/default/amba_socket-1.0.15.tgz"
+	exit
+      end
+
       chef.add_recipe("chef-libc-dev")
       chef.add_recipe("chef-make")
       chef.add_recipe("chef-python")
@@ -120,6 +123,8 @@ Vagrant::Config.run do |config|
       chef.add_recipe("chef-gcc")
       chef.add_recipe("chef-amba-kit");
       chef.add_recipe("chef-systemc");
+      chef.add_recipe("chef-greensocket");
+      chef.add_recipe("chef-greencontrol");
       chef.add_recipe("chef-gem5")
     end
   end
