@@ -31,3 +31,6 @@
 [submodule "cookbooks/chef-greensocket"]
 	path = cookbooks/chef-greensocket
 	url = git://git.greensocs.com/chef-greensocket
+[submodule "cookbooks/chef-http_proxy"]
+	path = cookbooks/chef-http_proxy
+	url = git://git.greensocs.com/chef-http_proxy

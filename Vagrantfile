@@ -115,6 +115,16 @@ Vagrant::Config.run do |config|
 	exit
       end
 
+      if File.exists?(".http_proxy") 
+# we've already asked
+     else
+       puts "Please enter your http proxy (or hit return if you don't use one)"
+       File.open('.http_proxy', 'w') do |file| 
+         file.puts "export http_proxy="+STDIN.gets
+       end
+     end
+      chef.add_recipe("chef-http_proxy")
+
       chef.add_recipe("chef-libc-dev")
       chef.add_recipe("chef-make")
       chef.add_recipe("chef-python")
