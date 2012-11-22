@@ -135,6 +135,7 @@ Vagrant::Config.run do |config|
       chef.add_recipe("chef-systemc");
       chef.add_recipe("chef-greensocket");
       chef.add_recipe("chef-greencontrol");
+      chef.add_recipe("chef-greenlib");
       chef.add_recipe("chef-gem5")
     end
   end

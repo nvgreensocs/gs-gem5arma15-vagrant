@@ -34,3 +34,6 @@
 [submodule "cookbooks/chef-http_proxy"]
 	path = cookbooks/chef-http_proxy
 	url = git://git.greensocs.com/chef-http_proxy
+[submodule "cookbooks/chef-greenlib"]
+	path = cookbooks/chef-greenlib
+	url = git://git.greensocs.com/chef-greenlib
