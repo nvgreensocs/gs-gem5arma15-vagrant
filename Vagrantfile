@@ -9,11 +9,11 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "GreenSocsBaseMachine"
+  config.vm.box = "GreenSocsBaseMachine26Nov12"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://www.greensocs.com/files/GreenSocsBaseMachine.box"
+  config.vm.box_url = "http://www.greensocs.com/files/GreenSocsBaseMachine26Nov12.box"
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
