@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-
+require 'open-uri'
 
 Vagrant::Config.run do |config|
   # All Vagrant configuration is done here. The most common configuration
@@ -115,14 +115,26 @@ Vagrant::Config.run do |config|
 	exit
       end
 
-      if File.exists?(".http_proxy") 
-# we've already asked
-     else
-       puts "Please enter your http proxy (or hit return if you don't use one)"
-       File.open('.http_proxy', 'w') do |file| 
-         file.puts "export http_proxy="+STDIN.gets
-       end
-     end
+#      if File.exists?(".http_proxy") 
+## we've already asked
+#     else
+#       puts "Please enter your http proxy (or hit return if you don't use one)"
+#       File.open('.http_proxy', 'w') do |file| 
+#         file.puts STDIN.gets
+#       end
+#     end
+
+
+      http_proxy = ENV['http_proxy'] || ENV['HTTP_PROXY']
+
+      if !open("http://www.greensocs.com/") && !http_proxy
+	puts "Please set your http_proxy environment variable"
+	exit -1
+      end
+
+      chef.http_proxy = http_proxy
+      chef.https_proxy=http_proxy
+
       chef.add_recipe("chef-http_proxy")
 
       chef.add_recipe("chef-libc-dev")
