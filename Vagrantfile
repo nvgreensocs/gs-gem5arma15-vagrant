@@ -29,6 +29,13 @@ Vagrant::Config.run do |config|
   # physical device on your network.
   # config.vm.network :bridged
 
+
+#    config.vm.network :bridged, { bridge: 'eth0', nic_type: 'virtio', auto_config: false }
+
+
+  config.vm.customize(["modifyvm", :id, "--nictype1", "virtio"])
+
+
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
   # config.vm.forward_port 80, 8080
@@ -155,6 +162,6 @@ Vagrant::Config.run do |config|
 
   config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
 
-  config.vm.customize ["modifyvm", :id, "--memory", "11000"]
+  config.vm.customize ["modifyvm", :id, "--memory", "2048"]
 
 end
