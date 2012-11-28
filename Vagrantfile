@@ -139,21 +139,16 @@ Vagrant::Config.run do |config|
 	exit -1
       end
 
+      chef.cookbooks_path = ["cookbooks", "."]
+
       chef.http_proxy = http_proxy
       chef.https_proxy=http_proxy
-
+      chef.add_recipe("apt")
+      chef.add_recipe("versions")
       chef.add_recipe("chef-http_proxy")
 
-      chef.add_recipe("chef-libc-dev")
-      chef.add_recipe("chef-make")
-      chef.add_recipe("chef-python")
-      chef.add_recipe("chef-boost")
-      chef.add_recipe("chef-build-essential")
-      chef.add_recipe("chef-gcc")
       chef.add_recipe("chef-amba-kit");
       chef.add_recipe("chef-systemc");
-#      chef.add_recipe("chef-greensocket");
-#      chef.add_recipe("chef-greencontrol");
       chef.add_recipe("chef-greenlib");
       chef.add_recipe("chef-gem5")
     end

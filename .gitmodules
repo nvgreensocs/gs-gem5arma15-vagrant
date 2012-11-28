@@ -1,39 +1,18 @@
-[submodule "cookbooks/chef-gcc"]
-	path = cookbooks/chef-gcc
-	url = git://git.greensocs.com/chef-gcc
 [submodule "cookbooks/chef-amba-kit"]
 	path = cookbooks/chef-amba-kit
 	url = git://git.greensocs.com/chef-amba-kit
-[submodule "cookbooks/chef-boost"]
-	path = cookbooks/chef-boost
-	url = git://git.greensocs.com/chef-boost
 [submodule "cookbooks/chef-gem5"]
 	path = cookbooks/chef-gem5
 	url = git://git.greensocs.com/chef-gem5
-[submodule "cookbooks/chef-python"]
-	path = cookbooks/chef-python
-	url = git://git.greensocs.com/chef-python
 [submodule "cookbooks/chef-systemc"]
 	path = cookbooks/chef-systemc
 	url = git://git.greensocs.com/chef-systemc
-[submodule "cookbooks/chef-libc-dev"]
-	path = cookbooks/chef-libc-dev
-	url = git://git.greensocs.com/chef-libc-dev
-[submodule "cookbooks/chef-make"]
-	path = cookbooks/chef-make
-	url = git://git.greensocs.com/chef-make
-[submodule "cookbooks/chef-build-essential"]
-	path = cookbooks/chef-build-essential
-	url = git://git.greensocs.com/chef-build-essential
-[submodule "cookbooks/chef-greencontrol"]
-	path = cookbooks/chef-greencontrol
-	url = git://git.greensocs.com/chef-greencontrol
-[submodule "cookbooks/chef-greensocket"]
-	path = cookbooks/chef-greensocket
-	url = git://git.greensocs.com/chef-greensocket
 [submodule "cookbooks/chef-http_proxy"]
 	path = cookbooks/chef-http_proxy
 	url = git://git.greensocs.com/chef-http_proxy
 [submodule "cookbooks/chef-greenlib"]
 	path = cookbooks/chef-greenlib
 	url = git://git.greensocs.com/chef-greenlib
+[submodule "cookbooks/apt"]
+	path = cookbooks/apt
+	url = git://github.com/opscode-cookbooks/apt.git
