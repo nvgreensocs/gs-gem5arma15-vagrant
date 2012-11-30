@@ -111,27 +111,6 @@ Vagrant::Config.run do |config|
 
     config.vm.provision :chef_solo do |chef|
 
-# THIS CODE REQUIRED BY THE AMBA KIT
-      if File.exist?("./cookbooks/chef-amba-kit/files/default/amba_socket-1.0.15.tgz")
-#  puts "Ok, we're good to go"
-      else
-	puts "Please visit : "
-	puts "https://portal.carbondesignsystems.com/login.aspx?ReturnUrl=%2fModel%2fCarbon%2fTLM-2.0-AMBA"
-	puts "and place the amba kit download in:"
-	puts "cookbooks/chef-amba-kit/files/default/amba_socket-1.0.15.tgz"
-	exit
-      end
-
-#      if File.exists?(".http_proxy") 
-## we've already asked
-#     else
-#       puts "Please enter your http proxy (or hit return if you don't use one)"
-#       File.open('.http_proxy', 'w') do |file| 
-#         file.puts STDIN.gets
-#       end
-#     end
-
-
       http_proxy = ENV['http_proxy'] || ENV['HTTP_PROXY']
 
       if !open("http://www.greensocs.com/") && !http_proxy
