@@ -16,3 +16,6 @@
 [submodule "cookbooks/apt"]
 	path = cookbooks/apt
 	url = git://github.com/opscode-cookbooks/apt.git
+[submodule "cookbooks/chef-autoshutdown"]
+	path = cookbooks/chef-autoshutdown
+	url = git://git.greensocs.com/chef-autoshutdown

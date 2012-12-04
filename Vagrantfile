@@ -3,6 +3,36 @@
 
 require 'open-uri'
 
+class SSHExecuteCommand < Vagrant::Command::Base
+  def help
+      puts <<-EOS
+Usage: vagrant run <command> [options...]
+      EOS
+    end
+  def execute
+    env=Vagrant::Environment.new(:ui_class => Vagrant::UI::Colored)
+
+    topdir=File.dirname(__FILE__).split(Regexp.union(*[File::SEPARATOR, File::ALT_SEPARATOR].compact));
+    pwddir = Dir.pwd.split(Regexp.union(*[File::SEPARATOR, File::ALT_SEPARATOR].compact));
+    topdir.each { |x|   pwddir=pwddir.drop(1) if pwddir.first == x }
+
+    pwddir=pwddir.join(File::SEPARATOR);
+
+    env.cli("up") if !env.primary_vm.created?
+    env.cli("up","--no-provision") if !env.primary_vm.channel.ready?
+
+   @main_args, @sub_command, @sub_args = split_main_and_subcommand(@argv)
+    help if !@sub_command
+    command="cd /vagrant/#{pwddir};"+@sub_command + " " + @sub_args.join(" ")
+    env.primary_vm.channel.execute(command) do |type, data|
+      puts data
+    end
+
+  end
+end
+
+Vagrant.commands.register(:run) { SSHExecuteCommand }
+
 Vagrant::Config.run do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
@@ -130,6 +160,8 @@ Vagrant::Config.run do |config|
       chef.add_recipe("chef-systemc");
       chef.add_recipe("chef-greenlib");
       chef.add_recipe("chef-gem5")
+
+      chef.add_recipe("chef-autoshutdown");
     end
   end
 
