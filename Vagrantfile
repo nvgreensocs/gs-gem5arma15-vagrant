@@ -34,9 +34,9 @@ class SSHExecuteCommand < Vagrant::Command::Base
   end
 end
 
-class UpdateExecuteCommand < Vagrant::Command::Base
+class UpgradeExecuteCommand < Vagrant::Command::Base
   def help
-      abort ("Usage: vagrant update <tarball.tar.gz>")
+      abort ("Usage: vagrant upgrade <tarball.tar.gz>")
     end
   def execute
     env=Vagrant::Environment.new(:ui_class => Vagrant::UI::Colored)
@@ -55,15 +55,14 @@ class UpdateExecuteCommand < Vagrant::Command::Base
     Minitar.unpack(tgz, parentdir)
 
 
-    env.boxes.each { |box|  box.destroy! }
+    env.boxes.each { |box|  box.destroy }
 
-    env.cli("up");
-
+    exec('vagrant up'); ## Dont simply call env.cli("up") as we want it to re-read this file
   end
 end
 
 Vagrant.commands.register(:run) { SSHExecuteCommand  }
-Vagrant.commands.register(:update) { UpdateExecuteCommand }
+Vagrant.commands.register(:upgrade) { UpgradeExecuteCommand }
 
 Vagrant::Config.run do |config|
   # All Vagrant configuration is done here. The most common configuration
