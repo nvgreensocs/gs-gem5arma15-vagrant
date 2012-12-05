@@ -2,14 +2,19 @@
 # vi: set ft=ruby :
 
 require 'open-uri'
+require 'fileutils'
+require 'zlib' 
+require 'archive/tar/minitar'
+include Archive::Tar
 
 class SSHExecuteCommand < Vagrant::Command::Base
   def help
-      puts <<-EOS
-Usage: vagrant run <command> [options...]
-      EOS
+      abort("Usage: vagrant run <command> [options...]")
     end
   def execute
+   @main_args, @sub_command, @sub_args = split_main_and_subcommand(@argv)
+    help if !@sub_command
+
     env=Vagrant::Environment.new(:ui_class => Vagrant::UI::Colored)
 
     topdir=File.dirname(__FILE__).split(Regexp.union(*[File::SEPARATOR, File::ALT_SEPARATOR].compact));
@@ -21,8 +26,6 @@ Usage: vagrant run <command> [options...]
     env.cli("up") if !env.primary_vm.created?
     env.cli("up","--no-provision") if !env.primary_vm.channel.ready?
 
-   @main_args, @sub_command, @sub_args = split_main_and_subcommand(@argv)
-    help if !@sub_command
     command="cd /vagrant/#{pwddir};"+@sub_command + " " + @sub_args.join(" ")
     env.primary_vm.channel.execute(command) do |type, data|
       puts data
@@ -31,7 +34,36 @@ Usage: vagrant run <command> [options...]
   end
 end
 
-Vagrant.commands.register(:run) { SSHExecuteCommand }
+class UpdateExecuteCommand < Vagrant::Command::Base
+  def help
+      abort ("Usage: vagrant update <tarball.tar.gz>")
+    end
+  def execute
+    env=Vagrant::Environment.new(:ui_class => Vagrant::UI::Colored)
+    @main_args, @tarball, @sub_args = split_main_and_subcommand(@argv)
+    help if !@tarball || !File.exists?(@tarball)
+
+    dir=File.dirname(__FILE__)
+    parentdir=File.dirname(dir)
+
+    env.cli("halt");
+    env.cli("destroy");
+    
+    FileUtils.rm_rf (dir+File::SEPARATOR+"ModelLibrary")
+
+    tgz = Zlib::GzipReader.new(File.open(@tarball, 'rb'))
+    Minitar.unpack(tgz, parentdir)
+
+
+    env.boxes.each { |box|  box.destroy! }
+
+    env.cli("up");
+
+  end
+end
+
+Vagrant.commands.register(:run) { SSHExecuteCommand  }
+Vagrant.commands.register(:update) { UpdateExecuteCommand }
 
 Vagrant::Config.run do |config|
   # All Vagrant configuration is done here. The most common configuration
