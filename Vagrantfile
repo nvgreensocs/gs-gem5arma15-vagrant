@@ -36,12 +36,19 @@ end
 
 class UpgradeExecuteCommand < Vagrant::Command::Base
   def help
-      abort ("Usage: vagrant upgrade <tarball.tar.gz>")
+      abort ("Usage: vagrant upgrade [<tarball.tar.gz>]   If the optional tar ball is given, it is used, otherwise a git pull origin master is attempted")
     end
   def execute
     env=Vagrant::Environment.new(:ui_class => Vagrant::UI::Colored)
+      http_proxy = ENV['http_proxy'] || ENV['HTTP_PROXY']
+
+      if !open("http://www.greensocs.com/") && !http_proxy
+	puts "Please set your http_proxy environment variable"
+	exit -1
+      end
+
     @main_args, @tarball, @sub_args = split_main_and_subcommand(@argv)
-    help if !@tarball || !File.exists?(@tarball)
+#    help if !@tarball || !File.exists?(@tarball)
 
     dir=File.dirname(__FILE__)
     parentdir=File.dirname(dir)
@@ -51,9 +58,18 @@ class UpgradeExecuteCommand < Vagrant::Command::Base
     
     FileUtils.rm_rf (dir+File::SEPARATOR+"ModelLibrary")
 
-    tgz = Zlib::GzipReader.new(File.open(@tarball, 'rb'))
-    Minitar.unpack(tgz, parentdir)
-
+    if @tarball && File.exists?(@tarball)
+      tgz = Zlib::GzipReader.new(File.open(@tarball, 'rb'))
+      Minitar.unpack(tgz, parentdir)
+    else
+      block do
+	IO.popen( <<-EOH
+	       cd #{dir}
+	       git pull origin master
+	       EOH
+	       ) { |f|  f.each_line { |line| puts line } }
+      end
+    end
 
     env.boxes.each { |box|  box.destroy }
 
@@ -70,11 +86,14 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "GreenSocsBaseMachine26Nov12"
+# 64 bit box
+#  config.vm.box = "GreenSocsBaseMachine26Nov12"
+  config.vm.box = "GreenSocsBaseMachine32Bit15Jan13"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://www.greensocs.com/files/GreenSocsBaseMachine26Nov12.box"
+#  config.vm.box_url = "http://www.greensocs.com/files/GreenSocsBaseMachine26Nov12.box"
+  config.vm.box_url = "http://www.greensocs.com/files/GreenSocsBaseMachine32Bit15Jan13.box"
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
