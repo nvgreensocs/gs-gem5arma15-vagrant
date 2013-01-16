@@ -62,13 +62,11 @@ class UpgradeExecuteCommand < Vagrant::Command::Base
       tgz = Zlib::GzipReader.new(File.open(@tarball, 'rb'))
       Minitar.unpack(tgz, parentdir)
     else
-      block do
 	IO.popen( <<-EOH
-	       cd #{dir}
+	       cd '#{dir}'
 	       git pull origin master
 	       EOH
 	       ) { |f|  f.each_line { |line| puts line } }
-      end
     end
 
     env.boxes.each { |box|  box.destroy }
