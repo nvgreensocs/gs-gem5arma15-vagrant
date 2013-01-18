@@ -208,8 +208,11 @@ Vagrant::Config.run do |config|
       chef.add_recipe("chef-systemc");
       chef.add_recipe("chef-greenlib");
       chef.add_recipe("chef-gem5")
+      chef.add_recipe("chef-ACESlave");
 
       chef.add_recipe("chef-autoshutdown");
+
+      chef.add_recipe("toplevel")
     end
   end
 
