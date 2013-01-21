@@ -65,6 +65,7 @@ class UpgradeExecuteCommand < Vagrant::Command::Base
 	IO.popen( <<-EOH
 	       cd '#{dir}'
 	       git pull origin master
+                           git submodule update
 	       EOH
 	       ) { |f|  f.each_line { |line| puts line } }
     end
