@@ -12,6 +12,10 @@
 # 
 # ENDLICENSETEXT
 
+package "libboost-program-options1.49-dev"
+package "libboost-regex1.49-dev"
+package "libboost-system1.49-dev"
+package "libboost-filesystem1.49-dev"
 
 ruby_block "compile TOPLEVEL" do
   block do
