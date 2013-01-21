@@ -7,6 +7,8 @@ require 'zlib'
 require 'archive/tar/minitar'
 include Archive::Tar
 
+ENV['LC_MESSAGES']='C';
+
 class SSHExecuteCommand < Vagrant::Command::Base
   def help
       abort("Usage: vagrant run <command> [options...]")
@@ -16,7 +18,7 @@ class SSHExecuteCommand < Vagrant::Command::Base
     help if !@sub_command
 
     env=Vagrant::Environment.new(:ui_class => Vagrant::UI::Colored)
-
+ENV['LC_MESSAGES']='C';
     topdir=File.dirname(__FILE__).split(Regexp.union(*[File::SEPARATOR, File::ALT_SEPARATOR].compact));
     pwddir = Dir.pwd.split(Regexp.union(*[File::SEPARATOR, File::ALT_SEPARATOR].compact));
     topdir.each { |x|   pwddir=pwddir.drop(1) if pwddir.first == x }
@@ -26,7 +28,7 @@ class SSHExecuteCommand < Vagrant::Command::Base
     env.cli("up") if !env.primary_vm.created?
     env.cli("up","--no-provision") if !env.primary_vm.channel.ready?
 
-    command="cd /vagrant/#{pwddir};"+@sub_command + " " + @sub_args.join(" ")
+    command="export LC_MESSAGES='C';cd /vagrant/#{pwddir};"+@sub_command + " " + @sub_args.join(" ")
     env.primary_vm.channel.execute(command) do |type, data|
       puts data
     end
