@@ -16,7 +16,8 @@ toplevel = "toplevel";
 
 memory = "2048";
 
-box = "GreenSocsBaseMachine32Bit15Jan13"
+#box = "GreenSocsBaseMachine32Bit15Jan13"
+box = "GreenSocsBaseMachine26Nov12"
 
 GSProject.new(box,cookbooks, versions, toplevel, memory).run;
 
