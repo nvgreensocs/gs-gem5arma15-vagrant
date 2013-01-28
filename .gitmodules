@@ -22,3 +22,6 @@
 [submodule "cookbooks/chef-ACESlave"]
 	path = cookbooks/chef-ACESlave
 	url = git://git.greensocs.com/chef-ACESlave
+[submodule "GSProject"]
+	path = GSProject
+	url = git://git.greensocs.com/GSProject
