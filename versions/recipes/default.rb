@@ -16,6 +16,22 @@ package "gcc-4.7"
 package "g++-4.7"
 package "build-essential"
 
+
+package "mercurial"
+package "git"
+package "scons"
+package "libc-dev"
+package "make"
+package "python-dev"
+package "swig"
+package "m4"
+package "liblua5.2-dev" 
+package "libgoogle-perftools-dev"
+package "libxerces-c-dev"
+
+package "cmake"
+package "libboost-filesystem1.49-dev"
+
 bash "Set up gcc alternatives" do
 code <<-EOH
    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 10

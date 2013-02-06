@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 pwd=File.dirname(File.expand_path(__FILE__))
-require "#{pwd}/GSProject/GSVagrantFile.rb"
+require "#{pwd}/GSProject/GSVagrantfile.rb"
 
 cookbooks=[
   "chef-amba-kit",
