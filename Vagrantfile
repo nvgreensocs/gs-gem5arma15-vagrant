@@ -1,7 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-require_relative "GSProject/GSVagrantFile.rb"
+pwd=File.dirname(File.expand_path(__FILE__))
+require "#{pwd}/GSProject/GSVagrantFile.rb"
 
 cookbooks=[
   "chef-amba-kit",
@@ -19,9 +20,5 @@ memory = "2048";
 box = "GreenSocsBaseMachine32Bit15Jan13"
 #box = "GreenSocsBaseMachine64Bit28Jan13"
 
-GSProject.new(box,cookbooks, versions, toplevel, memory).run;
 
-
-
-
-
+GSProject.new(box,cookbooks, versions, toplevel, memory).run 
