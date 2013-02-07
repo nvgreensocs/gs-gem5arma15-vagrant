@@ -21,8 +21,7 @@
 ruby_block "compile TOPLEVEL" do
   block do
     IO.popen(  <<-EOH
-       . #{node[:prefix]}/bash.profile.d/*
-
+       for i in #{node[:prefix]}/bash.profile.d/*; do . $i; done
        cd /vagrant/Platform
        scons
      EOH
