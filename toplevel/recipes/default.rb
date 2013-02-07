@@ -20,13 +20,13 @@
 
 ruby_block "compile TOPLEVEL" do
   block do
-    IO.popen( ["bash", "-c", <<-EOH
-       for i in #{node[:prefix]}/bash.profile.d/* ; do source $i ; done
+    IO.popen(  <<-EOH
+       . #{node[:prefix]}/bash.profile.d/*
 
        cd /vagrant/Platform
        scons
      EOH
-   ] ) { |f|  f.each_line { |line| puts line } }
+   ) { |f|  f.each_line { |line| puts line } }
   end
 #  creates "/vagrant/somethign to run?"
 end
