@@ -153,6 +153,7 @@ env.Append(CPPPATH=[
 	Dir('..'+os.sep+'ModelLibrary'+os.sep+'ACESlave'+os.sep+'include'),
 	Dir('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'ArmA15'+os.sep+'include'),
 	Dir(os.sep+'usr'+os.sep+'local'+os.sep+'systemc-2.3.0'+os.sep+'include'),
+	Dir(os.environ['SYSTEMC_HOME']+os.sep+'include'),
 	Dir(os.sep+'usr'+os.sep+'include'+os.sep+'lua5.2'),
 	py_includes
 ])
@@ -212,6 +213,8 @@ libpath = ['..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+
 libpath.append(py_lib_path)
 libpath.append(os.sep+'usr'+os.sep+'local'+os.sep+'systemc-2.3.0'+os.sep+'lib-linux')
 libpath.append(os.sep+'usr'+os.sep+'local'+os.sep+'systemc-2.3.0'+os.sep+'lib-linux64')
+libpath.append(os.environ['SYSTEMC_HOME']+os.sep+'lib-linux64')
+libpath.append(os.environ['SYSTEMC_HOME']+os.sep+'lib-linux')
 libpath.append('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'ArmA15'+os.sep+'lib')
 libpath.append('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+'build'+os.sep+'gzstream')
 libpath.append('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+'build'+os.sep+'libelf')
@@ -221,7 +224,8 @@ a15_testbench=env.Program(target='A15_testbench'+os.sep+'bin'+os.sep+'A15_testbe
 env.Install(target='A15_testbench'+os.sep+'bin'+os.sep, source='..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+'lib'+os.sep+'libgem5_rel0.so')
 env.Install(target='A15_testbench'+os.sep+'bin'+os.sep, source='..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'ArmA15'+os.sep+'lib'+os.sep+'libarmA15.so')
 #Best strategy here?
-if binary_width == "64":
-	env.Install(target='A15_testbench'+os.sep+'bin'+os.sep, source=os.sep+'usr'+os.sep+'local'+os.sep+'systemc-2.3.0'+os.sep+'lib-linux64'+os.sep+'libsystemc-2.3.0.so')
-else:
-	env.Install(target='A15_testbench'+os.sep+'bin'+os.sep, source=os.sep+'usr'+os.sep+'local'+os.sep+'systemc-2.3.0'+os.sep+'lib-linux'+os.sep+'libsystemc-2.3.0.so')
+#I dont think we should re-install system libraries
+#if binary_width == "64":
+#	env.Install(target='A15_testbench'+os.sep+'bin'+os.sep, source=os.sep+'usr'+os.sep+'local'+os.sep+'systemc-2.3.0'+os.sep+'lib-linux64'+os.sep+'libsystemc-2.3.0.so')
+#else:
+#	env.Install(target='A15_testbench'+os.sep+'bin'+os.sep, source=os.sep+'usr'+os.sep+'local'+os.sep+'systemc-2.3.0'+os.sep+'lib-linux'+os.sep+'libsystemc-2.3.0.so')

@@ -12,18 +12,21 @@
 # 
 # ENDLICENSETEXT
 
-package "libboost-program-options1.49-dev"
-package "libboost-regex1.49-dev"
-package "libboost-system1.49-dev"
-package "libboost-filesystem1.49-dev"
+#remember to put these in your versions script
+#package "libboost-program-options1.49-dev"
+#package "libboost-regex1.49-dev"
+#package "libboost-system1.49-dev"
+#package "libboost-filesystem1.49-dev"
 
 ruby_block "compile TOPLEVEL" do
   block do
-    IO.popen( <<-EOH
+    IO.popen( ["bash", "-c", <<-EOH
+       for i in #{node[:prefix]}/bash.profile.d/* ; do source $i ; done
+
        cd /vagrant/Platform
        scons
      EOH
-   ) { |f|  f.each_line { |line| puts line } }
+   ] ) { |f|  f.each_line { |line| puts line } }
   end
 #  creates "/vagrant/somethign to run?"
 end

@@ -5,9 +5,9 @@ pwd=File.dirname(File.expand_path(__FILE__))
 require "#{pwd}/GSProject/GSVagrantfile.rb"
 
 cookbooks=[
-  "chef-amba-kit",
   "chef-systemc",
   "chef-greenlib",
+  "chef-amba-kit",
   "chef-gem5",
   "chef-ACESlave"
 ];

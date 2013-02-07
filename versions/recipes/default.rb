@@ -32,6 +32,12 @@ package "libxerces-c-dev"
 package "cmake"
 package "libboost-filesystem1.49-dev"
 
+package "libboost-program-options1.49-dev"
+package "libboost-regex1.49-dev"
+package "libboost-system1.49-dev"
+
+
+
 bash "Set up gcc alternatives" do
 code <<-EOH
    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 10
