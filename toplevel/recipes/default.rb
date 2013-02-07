@@ -22,7 +22,7 @@ ruby_block "compile TOPLEVEL" do
   block do
     IO.popen(  <<-EOH
        for i in #{node[:prefix]}/bash.profile.d/*; do . $i; done
-       cd /vagrant/Platform
+       cd #{node[:prefix]}/Platform
        scons
      EOH
    ) { |f|  f.each_line { |line| puts line } }
