@@ -19,7 +19,7 @@ A15.clk1_arm = "1 ns"
 --Tasks.test.Task1.kernel="/data/wisap/ebis/work/work/BenchSuite/Ericsson/eval_96_obf/ctrl_code/sched_rbs/verif/test_check_on.out"
 
 --Tasks.test.Task1.kernel="/data/wisap/aromana/bench/generic_benchmarks/lm_lat_mem_rd/lm_lat_mem_rd_nerios_edison.arm"
-A15.kernel="/vagrant/Platform/A15_testbench/arm_binaries/stream.arm"
+A15.kernel="../arm_binaries/stream.arm"
 --Tasks.test.Task1.kernel="/data/wisap/aromana/bench/generic_benchmarks/stream/stream_nerios_edison.arm"
 
 --Tasks.test.Task1.kernel="/data/wisap/ebis/work/work/cibu/generic_benchmarks/lm_lat_mem_rd/lm_lat_mem_rd_nerios_edison.arm"
