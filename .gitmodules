@@ -1,27 +1,27 @@
 [submodule "cookbooks/chef-amba-kit"]
 	path = cookbooks/chef-amba-kit
-	url = git://git.greensocs.com/chef-amba-kit
+	url = git://projects.greensocs.com/chef-scripts/chef-amba-kit
 [submodule "cookbooks/chef-gem5"]
 	path = cookbooks/chef-gem5
-	url = git://git.greensocs.com/chef-gem5
+	url = git://projects.greensocs.com/chef-scripts/chef-gem5
 [submodule "cookbooks/chef-systemc"]
 	path = cookbooks/chef-systemc
-	url = git://git.greensocs.com/chef-systemc
+	url = git://projects.greensocs.com/chef-scripts/chef-systemc
 [submodule "cookbooks/chef-http_proxy"]
 	path = cookbooks/chef-http_proxy
-	url = git://git.greensocs.com/chef-http_proxy
+	url = git://projects.greensocs.com/chef-scripts/chef-http-proxy.git
 [submodule "cookbooks/chef-greenlib"]
 	path = cookbooks/chef-greenlib
-	url = git://git.greensocs.com/chef-greenlib
+	url = git://projects.greensocs.com/chef-scripts/chef-greenlib
 [submodule "cookbooks/apt"]
 	path = cookbooks/apt
 	url = git://github.com/opscode-cookbooks/apt.git
 [submodule "cookbooks/chef-autoshutdown"]
 	path = cookbooks/chef-autoshutdown
-	url = git://git.greensocs.com/chef-autoshutdown
+	url = git://projects.greensocs.com/chef-scripts/chef-autoshutdown
 [submodule "cookbooks/chef-ACESlave"]
 	path = cookbooks/chef-ACESlave
-	url = git://git.greensocs.com/chef-ACESlave
+	url = git://projects.greensocs.com/chef-scripts/chef-aceslave.git
 [submodule "GSProject"]
 	path = GSProject
-	url = git://git.greensocs.com/GSProject
+	url = git://projects.greensocs.com/gs-platforms.git
