@@ -130,16 +130,13 @@ if sys.platform.startswith("win"):
 if sys.platform.startswith("linux"):
     tools_libs = ['systemc','lua5.2','boost_regex','boost_system','boost_filesystem','boost_program_options']#,'tcmalloc']
 
-if sys.platform.startswith("win"):
-    system_libs=[ 'mysqlclient'] 
-if sys.platform.startswith("linux"):
-    system_libs=[ 'pthread','stdc++','dl','m','rt','nsl','gcc','c','z'] #,'mysqlclient','ssl','crypto','krb5','k5crypto','kdb5','resolv','z','com_err']
+system_libs=[ 'pthread','stdc++','dl','m','rt','nsl','gcc','c','z'] #,'mysqlclient','ssl','crypto','krb5','k5crypto','kdb5','resolv','z','com_err']
 third_part_libs=[]
 
 if (build_mode == 'debug'):
-	third_part_libs += ['gzstream','python2.7','elf']
+	third_part_libs += ['gzstream','python2.7','elf','protobuf','fdt']
 if ((build_mode == 'release') | (build_mode == 'fast')):
-	third_part_libs += ['gzstream','python2.7','elf']
+	third_part_libs += ['gzstream','python2.7','elf','protobuf','fdt']
 	
 # setting includes
 
@@ -149,7 +146,7 @@ env.Append(CPPPATH=[
 	Dir('..'+os.sep+'ModelLibrary'+os.sep+'amba_socket'+os.sep+'dependencies'+os.sep+'AMBA-PV'+os.sep+'include'),
 	Dir('..'+os.sep+'ModelLibrary'+os.sep+'ACESlave'+os.sep+'trident'+os.sep+'include'),
 	Dir('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+'src'),
-	Dir('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+'build'+os.sep+'ARM'),
+	Dir('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+'sysc_build'+os.sep+'ARM'),
 	Dir('..'+os.sep+'ModelLibrary'+os.sep+'ACESlave'+os.sep+'include'),
 	Dir('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'ArmA15'+os.sep+'include'),
 	Dir(os.sep+'usr'+os.sep+'local'+os.sep+'systemc-2.3.0'+os.sep+'include'),
@@ -160,7 +157,7 @@ env.Append(CPPPATH=[
 
 # setting defines
 
-env.Append(CPPDEFINES=['SC_USE_STD_STRING','__SPIRIT_COMPLIANT__','SC_INCLUDE_DYNAMIC_PROCESSES','SYSTEMC','CBA_IF','SC_USE_DYNAMIC_PROCESSES',('DATECODE','now'),('USERID','user'),'GREENSOCS',('HIDE_ME','false'),('BOOST_FILESYSTEM_VERSION','3')])
+env.Append(CPPDEFINES=['_SYSTEMC_','SC_USE_STD_STRING','__SPIRIT_COMPLIANT__','SC_INCLUDE_DYNAMIC_PROCESSES','SYSTEMC','CBA_IF','SC_USE_DYNAMIC_PROCESSES',('DATECODE','now'),('USERID','user'),'GREENSOCS',('HIDE_ME','false'),('BOOST_FILESYSTEM_VERSION','3')])
 
 # cgem defines
 
@@ -216,8 +213,9 @@ libpath.append(os.sep+'usr'+os.sep+'local'+os.sep+'systemc-2.3.0'+os.sep+'lib-li
 libpath.append(os.environ['SYSTEMC_HOME']+os.sep+'lib-linux64')
 libpath.append(os.environ['SYSTEMC_HOME']+os.sep+'lib-linux')
 libpath.append('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'ArmA15'+os.sep+'lib')
-libpath.append('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+'build'+os.sep+'gzstream')
-libpath.append('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+'build'+os.sep+'libelf')
+libpath.append('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+'sysc_build'+os.sep+'gzstream')
+libpath.append('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+'sysc_build'+os.sep+'libfdt')
+libpath.append('..'+os.sep+'ModelLibrary'+os.sep+'Gem5SystemC'+os.sep+'gem5'+os.sep+'sysc_build'+os.sep+'libelf')
 
 env.VariantDir('A15_testbench'+os.sep+'obj'+os.sep+postfix,'A15_testbench'+os.sep+'src', duplicate=0)
 a15_testbench=env.Program(target='A15_testbench'+os.sep+'bin'+os.sep+'A15_testbench',source='A15_testbench'+os.sep+'src'+os.sep+'A15_testbench.cpp', LIBS=['gem5_rel0','armA15']+tools_libs+third_part_libs+system_libs, LIBPATH = libpath , LINKFLAGS="-nodefaultlibs -Wl,-as-needed")#, LINKFLAGS="--static")   

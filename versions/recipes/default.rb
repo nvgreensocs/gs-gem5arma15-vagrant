@@ -36,7 +36,10 @@ package "libboost-program-options1.49-dev"
 package "libboost-regex1.49-dev"
 package "libboost-system1.49-dev"
 
-
+package "corkscrew"
+package "libprotobuf-dev"
+package "protobuf-compiler"
+package "libgoogle-perftools-dev"
 
 bash "Set up gcc alternatives" do
 code <<-EOH
