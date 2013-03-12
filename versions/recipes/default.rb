@@ -1,15 +1,23 @@
-#this chef scrpt is intended to pin LOCAL versions of specific resources where they are critical for
-#this specific package.
 
-#if the version of a package is not important, then it need not be listed here, 
+#  -------    VERSIONS  --------
 
-#apt versions can be pinned e.g.
-#apt_preference "mercurial" do
-#   pin "version 2.2.2-1"
-#   pin_priority "1001"
-#end
+# LICENSETEXT
+# 
+#   Copyright (C) 2013 : GreenSocs Ltd
+#       http://www.greensocs.com/ , email: info@greensocs.com
+# 
+# The contents of this file are subject to the licensing terms specified
+# in the file LICENSE. Please consult this file for restrictions and
+# limitations that may apply.
+# 
+# ENDLICENSETEXT
 
-#pining gcc to gcc-4.4
+
+# List of all the required packages, and below 'alternatives' is used to set the right versions of critical packages
+
+# If we are not running as root, with a /vagrant, then assume the user will set up their own environment
+if ENV['USER']=='root' && File.exists?("/vagrant")
+
 package "gcc-4.4"
 package "g++-4.4"
 package "gcc-4.7"
@@ -62,5 +70,17 @@ code <<-EOH
 
     update-alternatives --set gcc "/usr/bin/gcc-4.4"
     update-alternatives --set g++ "/usr/bin/g++-4.4"
+EOH
+end
+else puts "WARNING: Assuming the user has set up all the needed packages and versions"
+end
+
+bash "Set up source versions" do
+code <<-EOH
+   mkdir -p "#{node[:prefix]}/bash.profile.d"
+   echo "export version_gem5_systemc_armmodel=4423607d090d0c60d1d9cda86ffa2bfe50a34ad6" >  "#{node[:prefix]}/bash.profile.d/version_gem5-systemc-armmodel.profile"
+   echo "export version_aceslave=60b1aed9908837e8991109d056894adcb7dcb892" >  "#{node[:prefix]}/bash.profile.d/version_aceslave.profile"
+   echo "export version_greenlib=9882235a024597fc3183a1db9eeb43be47f45532" >  "#{node[:prefix]}/bash.profile.d/version_greenlib.profile"
+   echo "export version_gem5=9562" >  "#{node[:prefix]}/bash.profile.d/version_gem5.profile"
 EOH
 end
