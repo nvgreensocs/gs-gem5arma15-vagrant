@@ -18,6 +18,12 @@
 # If we are not running as root, with a /vagrant, then assume the user will set up their own environment
 if ENV['USER']=='root' && File.exists?("/vagrant")
 
+bash "Update package list" do
+code <<-EOH
+    apt-get update
+EOH
+end
+
 package "gcc-4.4"
 package "g++-4.4"
 package "gcc-4.7"
